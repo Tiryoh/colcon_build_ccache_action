@@ -10,14 +10,16 @@ on:
   workflow_dispatch:
 
 env:
-  CCACHE_DIR: ${{ github.workspace }}/.ccache
-  CCACHE_BASEDIR: ${{ github.workspace }}
-  CCACHE_NOHASHDIR: true
+  # do not use {{ github.workspace }} because it is not available in the runner
+  # https://github.com/actions/runner/issues/2058
+  CCACHE_DIR: $GITHUB_WORKSPACE/.ccache
+  CCACHE_BASEDIR: $GITHUB_WORKSPACE
+  CCACHE_NOHASHDIR: "true"
   CCACHE_COMPRESS: "true"
   CCACHE_COMPRESSLEVEL: "1"
   CCACHE_MAXSIZE: "2G"
   CCACHE_SLOPPINESS: "file_macro,time_macros,include_file_mtime,include_file_ctime,file_stat_matches,system_headers"
-  CCACHE_LOGFILE: ${{ github.workspace }}/ccache.log
+  CCACHE_LOGFILE: $GITHUB_WORKSPACE/ccache.log
   CCACHE_DEBUG: "1"
 
 jobs:
