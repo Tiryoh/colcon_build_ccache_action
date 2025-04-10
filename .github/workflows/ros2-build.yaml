@@ -17,6 +17,7 @@ env:
   CCACHE_COMPRESSLEVEL: "1"
   CCACHE_MAXSIZE: "2G"
   CCACHE_SLOPPINESS: "file_macro,time_macros,include_file_mtime,include_file_ctime,file_stat_matches,system_headers"
+  CCACHE_LOGFILE: ccache.log
 
 jobs:
   build-jazzy:
@@ -72,3 +73,6 @@ jobs:
           ccache -vs
           ccache -x
           ccache -p
+      - name: Show ccache log
+        run: |
+          cat ${{ env.CCACHE_LOGFILE }}
