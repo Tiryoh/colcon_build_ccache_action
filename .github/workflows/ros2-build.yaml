@@ -10,7 +10,9 @@ on:
   workflow_dispatch:
 
 env:
-  CCACHE_DIR: /tmp/ccache
+  CCACHE_DIR: ${{ github.workspace }}/.ccache
+  CCACHE_BASEDIR: ${{ github.workspace }}
+  CCACHE_NOHASHDIR: true
   CCACHE_COMPRESS: "true"
   CCACHE_COMPRESSLEVEL: "1"
   CCACHE_MAXSIZE: "2G"
@@ -50,6 +52,7 @@ jobs:
           ccache --set-config=sloppiness=${{ env.CCACHE_SLOPPINESS }}
           ccache -vs
           ccache -x
+          ccache -p
       - name: Search packages in this repository
         id: list_packages
         run: |
@@ -64,3 +67,8 @@ jobs:
           no-symlink-install: true
           import-token: ${{ secrets.GITHUB_TOKEN }}
           extra-cmake-args: -DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_BUILD_TYPE=Release
+      - name: Show ccache stats
+        run: |
+          ccache -vs
+          ccache -x
+          ccache -p
