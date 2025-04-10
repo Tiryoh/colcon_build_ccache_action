@@ -76,4 +76,4 @@ jobs:
           ccache -p
       - name: Show ccache log
         run: |
-          cat ${{ env.CCACHE_LOGFILE }}
+          cat ${{ env.CCACHE_LOGFILE }} || echo "No ccache log file found"
