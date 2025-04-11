@@ -30,6 +30,9 @@ jobs:
       image: osrf/ros:jazzy-desktop-full
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
+          path: $GITHUB_WORKSPACE/ros_ws/src/target_package
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: jazzy
@@ -68,7 +71,7 @@ jobs:
         id: cmake_args
         run: |
           echo "args=-DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=\"-fdebug-prefix-map=${GITHUB_WORKSPACE}=.\" -DCMAKE_CXX_FLAGS=\"-fdebug-prefix-map=${GITHUB_WORKSPACE}=.\"" >> $GITHUB_OUTPUT
-      - uses: ros-tooling/action-ros-ci@v0.4
+      - uses: Tiryoh/action-ros-ci@b2033b3
         with:
           package-name: ${{ steps.list_packages.outputs.package_list }}
           target-ros2-distro: jazzy
