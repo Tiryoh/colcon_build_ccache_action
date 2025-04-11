@@ -71,7 +71,7 @@ jobs:
         id: cmake_args
         run: |
           echo "args=-DCMAKE_C_COMPILER_LAUNCHER=ccache -DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS=\"-fdebug-prefix-map=${GITHUB_WORKSPACE}=.\" -DCMAKE_CXX_FLAGS=\"-fdebug-prefix-map=${GITHUB_WORKSPACE}=.\"" >> $GITHUB_OUTPUT
-      - uses: Tiryoh/action-ros-ci@b2033b3
+      - uses: Tiryoh/action-ros-ci@b2033b3bbe33e38cc046af0d0acb07f1b97211f7
         with:
           package-name: ${{ steps.list_packages.outputs.package_list }}
           target-ros2-distro: jazzy
