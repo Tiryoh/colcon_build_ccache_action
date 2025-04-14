@@ -34,18 +34,22 @@ jobs:
           submodules: true
           path: $GITHUB_WORKSPACE/ros_ws/src/target_package
       - name: Show env
+        working-directory: $GITHUB_WORKSPACE
         run: |
           echo $GITHUB_WORKSPACE
           echo ${{ github.workspace }}
           echo $RUNNER_WORKSPACE
           echo ${{ runner.workspace }}
+          pwd
       - name: Show env (bash)
         shell: bash
+        working-directory: $GITHUB_WORKSPACE
         run: |
           echo $GITHUB_WORKSPACE
           echo ${{ github.workspace }}
           echo $RUNNER_WORKSPACE
           echo ${{ runner.workspace }}
+          pwd
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: jazzy
