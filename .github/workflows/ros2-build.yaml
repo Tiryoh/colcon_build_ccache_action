@@ -33,6 +33,19 @@ jobs:
         with:
           submodules: true
           path: $GITHUB_WORKSPACE/ros_ws/src/target_package
+      - name: Show env
+        run: |
+          echo $GITHUB_WORKSPACE
+          echo ${{ github.workspace }}
+          echo $RUNNER_WORKSPACE
+          echo ${{ runner.workspace }}
+      - name: Show env (bash)
+        shell: bash
+        run: |
+          echo $GITHUB_WORKSPACE
+          echo ${{ github.workspace }}
+          echo $RUNNER_WORKSPACE
+          echo ${{ runner.workspace }}
       - uses: ros-tooling/setup-ros@v0.7
         with:
           required-ros-distributions: jazzy
